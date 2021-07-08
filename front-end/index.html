@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--============================mobile supporter===================================-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.449.0.min.js"></script>
+    <script src="js/aws.js"></script>
+    <script type="text/javascript" src="js/apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="js/apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="js/apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js"></script>
+    <script type="text/javascript" src="js/apiGateway-js-sdk/lib/CryptoJS/components/hmac.js"></script>
+    <script type="text/javascript" src="js/apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js"></script>
+    <script type="text/javascript" src="js/apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+    <script type="text/javascript" src="js/apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+    <script type="text/javascript" src="js/apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+    <script type="text/javascript" src="js/apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+    <script type="text/javascript" src="js/apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+    <script type="text/javascript" src="js/apigClient.js"></script>
+    <!--====================================Install Local API Lib=================================================-->
+    <script src="./js/recorder.mp3.min.js"></script>
+    <script src="./js/recorder.js"></script>
+    <script src="./js/imageDealer.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.2/js/fileinput.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--====================================local css=================================================-->
+    <link href="https://fonts.googleapis.com/css?family=Anton|Cute+Font|Montserrat|Patua+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <title>Smart Photo Album</title>
+</head>
+<body>
+
+<!--the search part-->
+<div class="container-fluid">
+    <h1>Smart Photo Album</h1>
+    <div style="max-width: 50em; width: 75%; margin: auto">
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input"
+                       accept="image/png, image/jpg, image/jpeg"
+                       id="inputFile">
+                <label class="custom-file-label" style="z-index: -100" for="inputFile">Select photo</label>
+            </div>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="upLoadPhoto()">Upload to cloud</button>
+            </div>
+        </div>
+        <br>
+
+
+        <div class="input-group">
+            <input id='searchValue' type="text"
+                   class="form-control" placeholder="Search photo here" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"
+                        onclick="searchPhoto()">Search</button>
+                <button id = 'record' class="btn btn-outline-secondary"
+                        type="button" onclick="dealRecorder(30)">
+                    <i class="fa fa-microphone"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div id="addContain" class="card border-dark mb-3 hide">
+    <div class="card-header" id="addName"></div>
+    <div class="card-body text-dark" >
+        <div class="card">
+            <img id='addPic' class="card-img-top" src="https://s3.amazonaws.com/cc-b2/images/Screen+Shot+2019-04-25+at+00.44.47.png" alt="Card image cap">
+        </div>
+    </div>
+</div>
+
+<div id="albumContain" class="card border-dark mb-3 card-columns hide">
+    <div class="card-header"><h5 id="searchName">Search Results</h5></div>
+    <div id="picContain" class="card-body text-dark row" >
+    </div>
+</div>
+
+</body>
+</html>
